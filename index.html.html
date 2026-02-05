@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+
+<style>
+    body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #ffffff, #f0f4ff);
+        font-family: "Courier New", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        background: white;
+        padding: 50px 60px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        max-width: 700px;
+    }
+
+    h1 {
+        color: #333;
+        font-size: 2.6em;
+        margin-bottom: 10px;
+    }
+
+    .name {
+        margin-bottom: 80px; /* BIG space so candle never covers name */
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #444;
+    }
+
+    /* Cake */
+    .cake {
+        position: relative;
+        margin: 0 auto 10px;
+        width: 160px;
+        height: 90px;
+        background: #6b3e26;
+        border-radius: 0 0 15px 15px;
+        cursor: pointer;
+    }
+
+    .cake::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: 0;
+        width: 160px;
+        height: 30px;
+        background: #ff9acb;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .candle {
+        position: absolute;
+        top: -55px;
+        left: 75px;
+        width: 10px;
+        height: 30px;
+        background: #ffffff;
+    }
+
+    .flame {
+        position: absolute;
+        top: -18px;
+        left: -6px;
+        width: 22px;
+        height: 22px;
+        background: radial-gradient(circle, #fff700, #ff9800);
+        border-radius: 50%;
+        animation: flicker 0.15s infinite;
+        box-shadow: 0 0 20px #ff9800;
+    }
+
+    @keyframes flicker {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .blow {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #ff4081;
+        animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+        50% { opacity: 0.3; }
+    }
+
+    .message {
+        margin-top: 18px;
+        font-size: 16px;
+        color: #333;
+        min-height: 40px;
+        white-space: pre-line;
+    }
+
+    .secret {
+        margin-top: 25px;
+        font-size: 14px;
+        color: #444;
+        line-height: 1.6;
+        display: none;
+        animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .confetti {
+        position: fixed;
+        top: -10px;
+        width: 10px;
+        height: 10px;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Happy Birthday 🎉</h1>
+
+    <div class="name">Elon Musk 💻✨</div>
+
+    <div class="cake" ondblclick="showSecret()">
+        <div class="candle" onclick="blowCandle()">
+            <div class="flame" id="flame"></div>
+        </div>
+    </div>
+
+    <div class="blow">↑ Blow the candle ↑</div>
+    <div class="message" id="message"></div>
+
+    <div class="secret" id="secret">
+Eight years in the same class is a lifetime of memories, even if we never named them out loud. You were part of my every school day, my normal, my comfort. When you left this year, something quietly broke in me and I don’t think you ever realized how much space you filled just by being there.
+<br><br>
+We talked mostly through social media, not because I didn’t care, but because I was akinda scaredy cat 😭😭. I wish I had been braver. But even with my silence, you mattered to me in ways I never knew how to explain.
+<br><br>
+Now the classroom is different. School is different. I just want you to know that you were important, you still are, and you are not forgotten.
+<br><br>
+— Yodahe 💙
+    </div>
+</div>
+
+<script>
+function blowCandle() {
+    document.getElementById("flame").style.display = "none";
+    document.getElementById("message").innerText =
+        "Wish granted. From Yodahe 💙";
+    launchConfetti();
+}
+
+function showSecret() {
+    document.getElementById("secret").style.display = "block";
+}
+
+function launchConfetti() {
+    for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+</script>
+
+</body>
+</html>
